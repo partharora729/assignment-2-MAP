@@ -1,20 +1,67 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * My To Do List App
+ *
+ * @format
+ */
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import React,{useState} from 'react';
+import {
+    SafeAreaView,
+    StyleSheet,
+    View,
+    Text,
+    ScrollView,
+    TextInput,
+    Button
+} from 'react-native';
+import ToDoList from './components/ToDoList';
+import ToDoForm from './components/ToDoForm';
+
+
+function App() {
+    const addTask = (taskText) => {
+        setTasks([...tasks, taskText]);
+      };
+      const [tasks, DoTasks] = useState([
+        'Do laundry',
+        'Go to gym',
+        'Walk dog'
+      ]);
+    return (
+        <SafeAreaView>
+           <ToDoList task ={tasks}/>
+           <ToDoForm addTask={addTask} />
+        </SafeAreaView>
+    );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
+    task: {
+        padding: 10,
+        borderBottomWidth: 1,
+        borderColor: '#ccc',
+    },
+    completed: {
+        backgroundColor: '#e0e0e0',
+    },
+    taskText: {
+        fontSize: 16,
+    },
+    form: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        marginHorizontal: 20,
+        marginTop: 20,
+    },
+    input: {
+        flex: 1,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        paddingHorizontal: 10,
+        paddingVertical: 5,
+        marginRight: 10,
+    },
 });
+
+export default App;
